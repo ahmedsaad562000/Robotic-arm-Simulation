@@ -1,0 +1,27 @@
+%Ahmed Mohamed Saad Hussein
+%1190184
+function[a1,a2,a3]=IKPM2(L1,L2,L3,x,y,Alpha) 
+Alpha=Alpha*pi/180;
+nx=x-L3*cos(Alpha);
+ny=y-L3*sin(Alpha);
+a2=acos(((nx*nx)+(ny*ny)-(L1*L1)-(L2*L2))/(2*L1*L2));
+ca1=(nx*(L1+L2*cos(a2))+ny*(L2*sin(a2)))/(nx^2+ny^2);
+sa1=(ny*(L1+L2*cos(a2))-nx*(L2*sin(a2)))/(nx^2+ny^2);
+a1=atan(abs(sa1)/abs((ca1)));
+a1=a1*180/pi;
+if(sa1>0&&ca1>0)
+ a1=1*a1;      
+end
+if(sa1>0&&ca1<0)
+ a1=180-a1;      
+end
+if(sa1<0&&ca1>0)
+ a1=360-a1;      
+end
+if(sa1<0&&ca1<0)
+ a1=180+a1;      
+end
+a2=a2*180/pi;
+Alpha=Alpha*180/pi;
+a3=Alpha-a1-a2;
+end
